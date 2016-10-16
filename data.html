@@ -1,0 +1,110 @@
+<html>
+<head>
+	<title>Runewords</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/material.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/ripples.js"></script>
+	<!-- Angular Material Library -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/bootstrap-material-design.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/ripples.css"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"></link>
+
+	<script src="data.js"></script>
+	<script src="app.js"></script>
+	<link rel="stylesheet" href="app.css"></link>
+</head>
+<body ng-app="mainApp">
+<div class="container">
+  <div class="well">
+  	<h1>Diablo II Runewords</h1>
+  	<p>Made by <a href="https://www.ggithub.com/shamrickus">shamrickus</a></p>
+  	<p><a href="https://www.github.com/shamrickus/d2runewords">Source</a></p>
+  </div>
+  <form action="">
+    <div class="form-group well" style="height:175px">
+      <div class="input-group">
+        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <input type="text" class="form-control" ng-model="searchTerm.name" placeholder="Name"/>
+      </div>
+      <div class="input-group">
+        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <input type="text" class="form-control" ng-model="searchTerm.sockets" placeholder="Sockets"/>
+      </div>
+      <div class="input-group">
+        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <input type="text" class="form-control" ng-model="searchTerm.itemType" placeholder="Item Type"/>
+      </div>
+      <div class="input-group">
+        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <input type="text" class="form-control" ng-model="searchTerm.runes" placeholder="Runes"/>
+      </div>
+      <div class="input-group">
+        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <input type="text" class="form-control" ng-model="searchTerm.properties" placeholder="Properties"/>
+      </div>
+      <div class="input-group">
+        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <input type="text" class="form-control" ng-model="searchTerm.lvlReq" placeholder="Level Requirement"/>
+      </div>
+    </div>
+  </form>
+  <div class="well">
+	<table class="table table-striped" ng-controller="sortController" ng-init="initItems()">
+	<thead>
+      <tr>
+        <th>
+          <a href="#" ng-click="sortName='name';sortReverse=!sortReverse">Name 
+             <span class="fa fa-caret-down" ng-show="!sortReverse"></span>
+             <span class="fa fa-caret-up" ng-show="sortReverse"></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="sortName='sockets';sortReverse=!sortReverse">Sockets
+             <span class="fa fa-caret-down" ng-show="!sortReverse"></span>
+             <span class="fa fa-caret-up" ng-show="sortReverse"></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="sortName='itemType';sortReverse=!sortReverse">Item Type
+             <span class="fa fa-caret-down" ng-show="!sortReverse"></span>
+             <span class="fa fa-caret-up" ng-show="sortReverse"></span>
+          </a>
+        </th>
+        <th>
+          <a href="#">Runes</a>
+        </th>
+        <th>
+          <a href="#">Properties</a>
+        </th>
+        <th>
+        	<a href="#" ng-click="sortName='lvlReq';sortReverse=!sortReverse">Lvl Req
+          		<span class="fa fa-caret-down" ng-show="!sortReverse"></span>
+            	<span class="fa fa-caret-up" ng-show="sortReverse"></span>
+        	</a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in items | orderBy:sortName:sortReverse | filter: searchTerm track by $index ">
+      	<td>{{getItemName(item)}}</td>
+      	<td class="number">{{item.sockets}}</td>
+      	<td>{{item.itemType}}</td>
+      	<td>{{outputRune(item.runes)}}</td>
+      	<td>
+      		<div ng-repeat="property in item.properties track by $index">
+      			{{property}}<br />
+      		</div>
+      	</td>
+      	<td class="number">{{item.lvlReq}}</td>
+      </tr>
+    </tbody>
+	</table>
+  </div>
+</div>
+</body>
+</html>
