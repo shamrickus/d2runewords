@@ -8,8 +8,8 @@ urls = ["http://classic.battle.net/diablo2exp/items/runewords-original.shtml", "
 
 class ItemParser:
 	def __init__(self):
-		self.sockets = 0
-		self.itemType = "Dagger"
+		self.sockets = None
+		self.itemType = None
 		self.classRestriction = None
 		self.runes = []
 		self.properties = []
@@ -18,24 +18,30 @@ class ItemParser:
 	def __str__(self):
 		return "Sockets: %d\nItem Type: %s\nClass: %s\nRunes: %s\nProperties: %s\nName: %s" % (self.sockets, self.itemType, self.classRestriction, str(self.runes), str(self.properties), self.name)
 
+	def blank(self):
+		return (self.sockets == None and self.itemType == None and self.classRestriction == None and self.runes == [] and self.properties == [] and self.name == None)
+
 	def parseItem(self, data, index, lastTag):
 		if(lastTag == "b"):
-			if(str(index) == "0"):
+			if(str(index) in ["0","12","13"]):
 				self.name = data.replace("*", "")
-			elif(str(index) == "1"):
+
+			elif(str(index) in ["1"]):
 				data = data.replace("(", "").replace(")", "").replace(" ", "")
 				self.classRestriction = data
+
 		elif(lastTag == "span"):
-			if((str(index) == "2" and self.classRestriction != None) or (str(index) == "1" and self.classRestriction == None)):
+			if((str(index) in ["2", "15"] and self.classRestriction != None) or (str(index) in ["1", "13", "15"] and self.classRestriction == None)):
 				value = data.split(" Socket ")
 				self.sockets = int(value[0])
 				self.itemType = value[1].replace("*", "")
-			elif((str(index) == "3" and self.classRestriction != None) or (str(index) == "2" and self.classRestriction == None)):
+
+			elif((str(index) in ["3", "16"] and self.classRestriction != None) or (str(index) in ["2", "14", "16"] and self.classRestriction == None)):
 				self.runes = data.split(" + ")
+
 		elif(lastTag == "br"):
 			self.properties.append(data)
-		#else:
-		#	print("Data: " ,data, "Index: ", index, "lastTag: ", lastTag)
+		#print("Data: " ,data, "Index: ", index, "lastTag: ", lastTag)
 
 class MyHTMLParser(HTMLParser):
 	def __init__(self):
@@ -90,8 +96,7 @@ class MyHTMLParser(HTMLParser):
 			return
 
 		if(self.inTd):
-			item = ItemParser()
-			if(self.columnNumber == 0 and self.tempItem != item):
+			if(self.columnNumber == 0 and not self.tempItem.blank()):
 				items.append(self.tempItem)
 				self.tempItem = ItemParser()
 			self.tempItem.parseItem(data, self.columnNumber, self.lastTag)
