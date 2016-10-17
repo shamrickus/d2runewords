@@ -7,13 +7,15 @@ items = []
 urls = ["http://classic.battle.net/diablo2exp/items/runewords-original.shtml", "http://classic.battle.net/diablo2exp/items/runewords-110.shtml", "http://classic.battle.net/diablo2exp/items/runewords-111.shtml"]
 
 class ItemParser:
-	def __init__(self):
-		self.sockets = None
-		self.itemType = None
+	def __init__(self, name = None, sockets = None, runes = [], itemType = None):
+		self.sockets = sockets
+		self.itemType = itemType
 		self.classRestriction = None
-		self.runes = []
+		self.runes = runes
 		self.properties = []
-		self.name = None
+		self.name = name
+
+		self.first = False
 
 	def __str__(self):
 		return "Sockets: %d\nItem Type: %s\nClass: %s\nRunes: %s\nProperties: %s\nName: %s" % (self.sockets, self.itemType, self.classRestriction, str(self.runes), str(self.properties), self.name)
@@ -27,7 +29,10 @@ class ItemParser:
 		bodySocketPattern = re.compile("^[1-6] Socket [A-Za-z\s\*\/\(\)]+$")
 		runePattern = re.compile("^(([A-Z][a-z]+)(\s\+\s))+([A-Z][a-z]+)$")
 
+
 		if(lastTag in ["br", "u", "font"]):
+			if(self.name == None):
+				return
 			self.properties.append(data)
 		elif(namePattern.match(data)):
 			self.name = data.replace("*", "")
@@ -41,7 +46,7 @@ class ItemParser:
 		elif(runePattern.match(data)):
 			self.runes = data.split(" + ")
 		#else:
-		#	print("Data: " ,data, "Index: ", index, "lastTag: ", lastTag)
+			#print("Data: ", data, "Index: ", index, "lastTag: ", lastTag)
 
 class MyHTMLParser(HTMLParser):
 	def __init__(self):
@@ -92,14 +97,35 @@ class MyHTMLParser(HTMLParser):
 		if(self.lastTag in skipTags):
 			return
 
-		if(data in ["Spirit", "Phoenix", "Fortitude", "Weapons", "Body Armor", "Shields"]):
-			return
+		ignoreRW = ["Spirit", "Phoenix", "Fortitude"]
+		ignoreExtra = ["Weapons", "Body Armor", "Shields"]
 
 		if(self.inTd):
 			if(self.columnNumber == 0 and not self.tempItem.blank() and self.tempItem.name != None and self.tempItem.sockets != None):
+					items.append(self.tempItem)
+					self.tempItem = ItemParser()
+
+			#This if statement is not needed, but it makes the code clearer
+			if(data in ignoreRW):
+				self.tempItem.parseItem(data, self.columnNumber, self.lastTag)
+
+			elif(data in ignoreExtra and not self.tempItem.first):
+				self.tempItem.itemType = data
+				self.tempItem.first = True
+				return
+
+			elif(data in ignoreExtra and self.tempItem.first):
+				name = self.tempItem.name
+				sockets = self.tempItem.sockets
+				runes = self.tempItem.runes
+				itemType = data
+
 				items.append(self.tempItem)
-				self.tempItem = ItemParser()
-			self.tempItem.parseItem(data, self.columnNumber, self.lastTag)
+				self.tempItem = ItemParser(name, sockets, runes, itemType)
+
+			else:
+				self.tempItem.parseItem(data, self.columnNumber, self.lastTag)
+
 			self.columnNumber+= 1
 
 def wrtieJSON(dump):
@@ -112,7 +138,6 @@ def getFeed(url):
 
 if __name__ == "__main__":
 	mhp = MyHTMLParser()
-
 	print "Calculating..."
 
 	if(len(sys.argv) < 3):
