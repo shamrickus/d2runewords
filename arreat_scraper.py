@@ -112,7 +112,6 @@ def getFeed(url):
 
 if __name__ == "__main__":
 	mhp = MyHTMLParser()
-
 	print "Calculating..."
 
 	if(len(sys.argv) < 3):

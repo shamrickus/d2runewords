@@ -1,4 +1,5 @@
 let data = [];
+data = [];
 data.push({"classRestriction": null, "name": "Ancient's Pledge", "runes": ["Ral", "Ort", "Tal"], "sockets": 3, "properties": ["+50% Enhanced Defense", "Cold Resist +43%", "Fire Resist +48%", "Lightning Resist +48%", "Poison Resist +48%", "10% Damage Goes To Mana"], "itemType": "Shields"});
 data.push({"classRestriction": null, "name": "Black", "runes": ["Thul", "Io", "Nef"], "sockets": 3, "properties": ["+120% Enhanced Damage", "40% Chance Of Crushing Blow", "+200 To Attack Rating", "Adds 3-14 Cold Damage - Cold Duration 3 Seconds", "+10 To Vitality", "15% Increased Attack Speed", "Knockback", "Magic Damage Reduced By 2", "Level 4 Corpse Explosion (12 Charges)"], "itemType": "Clubs/Hammers/Maces"});
 data.push({"classRestriction": null, "name": "Fury", "runes": ["Jah", "Gul", "Eth"], "sockets": 3, "properties": ["+209% Enhanced Damage", "40% Increased Attack Speed", "Prevent Monster Heal", "66% Chance Of Open Wounds", "33% Deadly Strike", "Ignore Target's Defense", "-25% Target Defense", "20% Bonus To Attack Rating", "6% Life Stolen Per Hit", "+5 To Frenzy (Barbarian Only)"], "itemType": "Melee Weapons"});
