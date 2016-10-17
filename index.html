@@ -25,6 +25,11 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/ripples.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"></link>
 
+  <script src="bootstrap-tagsinput-angular.js"></script>
+  <script src="bootstrap-tagsinput.js"></script>
+
+  <link rel="stylesheet" href="bootstrap-tagsinput.css"></link>
+
 	<script src="data.js"></script>
 	<script src="app.js"></script>
 	<link rel="stylesheet" href="app.css"></link>
@@ -39,29 +44,30 @@
   </div>
   <form action="">
     <div class="form-group well searchWell">
+      <p>To see specific field options, hover over icon next to the field</p>
       <div class="input-group">
         <div class="input-group-addon"><span class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="searchTerm.name" placeholder="Name"/>
+        <input type="text" class="form-control" ng-model="name" placeholder="Name"/>
       </div>
       <div class="input-group">
         <div class="input-group-addon"><span class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="searchTerm.sockets" placeholder="Sockets"/>
+        <input type="text" class="form-control" ng-model="sockets" placeholder="Sockets"/>
       </div>
       <div class="input-group">
         <div class="input-group-addon"><span class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="searchTerm.itemType" placeholder="Item Type"/>
+        <input type="text" class="form-control" ng-model="itemType" placeholder="Item Type"/>
       </div>
       <div class="input-group">
         <div class="input-group-addon"><span class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="searchTerm.runes" placeholder="Runes"/>
+        <input type="text" class="form-control" ng-model="properties" placeholder="Properties"/>
+      </div>
+      <div class="input-group">
+        <div class="input-group-addon"><span data-toggle="tooltip" title="" data-placement="bottom" data-original-title="You can either input a number for equality or you can type (<|<=|>|>=) XX" class="fa fa-search"></span></div>
+        <input type="text" class="form-control" ng-model="lvlReq" placeholder="Level Requirement"/>
       </div>
       <div class="input-group">
         <div class="input-group-addon"><span class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="searchTerm.properties" placeholder="Properties"/>
-      </div>
-      <div class="input-group">
-        <div class="input-group-addon"><span class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="searchTerm.lvlReq" placeholder="Level Requirement"/>
+        <input type="text" data-role="tagsinput" class="form-control" id="runes" placeholder="Runes"/>
       </div>
     </div>
   </form>
@@ -102,7 +108,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="item in items | orderBy:sortName:sortReverse | filter: searchTerm track by $index ">
+      <tr ng-repeat="item in items | orderBy:sortName:sortReverse | filter: checkFilters track by $index ">
       	<td>{{getItemName(item)}}</td>
       	<td class="number">{{item.sockets}}</td>
       	<td>{{item.itemType}}</td>
@@ -131,6 +137,12 @@
           <li>Fixed attributes for Bone</li>
           <li>Added Google Analytics</li>
         </ul>
+        <ul>
+          <b>1.0.1.0</b>
+          <li>Now doing custom filtering</li>
+          <li>Runes are now tags</li>
+          <li>Level Requirement support rudimentary math (<, >, <=, >=)</li>
+          <li>Added info modal that triggers on first load</li>
       </div>
     </div>
   </div>

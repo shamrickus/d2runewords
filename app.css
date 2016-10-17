@@ -9,24 +9,25 @@
 	width: 100%;
 }
 
+
 @media (min-width: 768px) {
-	.input-group{
+	.input-group, .bootstrap-tagsinput{
 		width:100%;
 	}
 
 	.searchWell{
-		height:300px;
+		height:325px;
 	}
 }
 
 @media (min-width: 1200px) {
-	.input-group{
+	.input-group, .bootstrap-tagsinput{
 		width: 49%;
 		min-width:500px;
 	}
 
 	.searchWell{
-		height: 175px;
+		height: 200px;
 	}
 }
 
