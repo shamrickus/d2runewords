@@ -1,7 +1,7 @@
 import urllib2, re, sys, json
 from HTMLParser import HTMLParser
 
-skipTags = ["font"]
+skipTags = ["a"]
 classes = ["Amazon", "Barbarian", "Paladin", "Sorceress", "Druid", "Assassin", "Necromancer"]
 items = []
 urls = ["http://classic.battle.net/diablo2exp/items/runewords-original.shtml", "http://classic.battle.net/diablo2exp/items/runewords-110.shtml", "http://classic.battle.net/diablo2exp/items/runewords-111.shtml"]
@@ -22,26 +22,26 @@ class ItemParser:
 		return (self.sockets == None and self.itemType == None and self.classRestriction == None and self.runes == [] and self.properties == [] and self.name == None)
 
 	def parseItem(self, data, index, lastTag):
-		if(lastTag == "b"):
-			if(str(index) in ["0","12","13"]):
-				self.name = data.replace("*", "")
+		namePattern = re.compile("^[A-Za-z\s\*\']+$")
+		classPattern = re.compile("^\s\([A-Za-z]*\)$")
+		bodySocketPattern = re.compile("^[1-6] Socket [A-Za-z\s\*\/\(\)]+$")
+		runePattern = re.compile("^(([A-Z][a-z]+)(\s\+\s))+([A-Z][a-z]+)$")
 
-			elif(str(index) in ["1"]):
-				data = data.replace("(", "").replace(")", "").replace(" ", "")
-				self.classRestriction = data
-
-		elif(lastTag == "span"):
-			if((str(index) in ["2", "15"] and self.classRestriction != None) or (str(index) in ["1", "13", "15"] and self.classRestriction == None)):
-				value = data.split(" Socket ")
-				self.sockets = int(value[0])
-				self.itemType = value[1].replace("*", "")
-
-			elif((str(index) in ["3", "16"] and self.classRestriction != None) or (str(index) in ["2", "14", "16"] and self.classRestriction == None)):
-				self.runes = data.split(" + ")
-
-		elif(lastTag == "br"):
+		if(lastTag in ["br", "u", "font"]):
 			self.properties.append(data)
-		#print("Data: " ,data, "Index: ", index, "lastTag: ", lastTag)
+		elif(namePattern.match(data)):
+			self.name = data.replace("*", "")
+		elif(classPattern.match(data)):
+			data = data.replace("(", "").replace(")", "").replace(" ", "")
+			self.classRestriction = data
+		elif(bodySocketPattern.match(data)):
+			value = data.split(" Socket ")
+			self.sockets = int(value[0])
+			self.itemType = value[1].replace("*", "")
+		elif(runePattern.match(data)):
+			self.runes = data.split(" + ")
+		#else:
+		#	print("Data: " ,data, "Index: ", index, "lastTag: ", lastTag)
 
 class MyHTMLParser(HTMLParser):
 	def __init__(self):
@@ -68,9 +68,9 @@ class MyHTMLParser(HTMLParser):
 	def handle_starttag(self, tag, attrs):
 		if(tag == "table" and self.__checkAttrs(attrs)):
 			self.inTable = True
-		elif(tag == "tr" and self.inTable):
+		elif(tag == "tr"):
 			self.inRow = True
-		elif(tag == "td" and self.inRow and self.inTable):
+		elif(tag == "td"):
 			self.inTd = True
 		elif(self.inTd):
 			self.lastTag = tag
@@ -79,11 +79,8 @@ class MyHTMLParser(HTMLParser):
 	def handle_endtag(self, tag):
 		if(tag == "table"):
 			self.inTable = False
-			self.inRow = False
-			self.inTd = False
 		elif(tag == "tr"):
 			self.inRow = False
-			self.inTd = False
 			self.columnNumber = 0
 			self.lastTag = None
 		elif(tag == "td"):
@@ -92,15 +89,17 @@ class MyHTMLParser(HTMLParser):
 	#This the data inbetween attributes
 	def handle_data(self, data):
 		data = data.rstrip()
-		if(self.lastTag in skipTags or data == ""):
+		if(self.lastTag in skipTags):
+			return
+
+		if(data in ["Spirit", "Phoenix", "Fortitude", "Weapons", "Body Armor", "Shields"]):
 			return
 
 		if(self.inTd):
-			if(self.columnNumber == 0 and not self.tempItem.blank()):
+			if(self.columnNumber == 0 and not self.tempItem.blank() and self.tempItem.name != None and self.tempItem.sockets != None):
 				items.append(self.tempItem)
 				self.tempItem = ItemParser()
 			self.tempItem.parseItem(data, self.columnNumber, self.lastTag)
-
 			self.columnNumber+= 1
 
 def wrtieJSON(dump):
@@ -121,6 +120,8 @@ if __name__ == "__main__":
 			mhp.feed(getFeed(url))
 	else:
 		mhp.feed(getFeed(sys.argv[1]))
+
+	items.append(mhp.tempItem)
 
 	file = open("data.js", "w")
 	file.write("let data = [];\n")
