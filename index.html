@@ -17,13 +17,14 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/material.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/ripples.js"></script>
-	<!-- Angular Material Library -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/bootstrap-material-design.css"></link>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/ripples.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"></link>
+  
+  <script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 
   <script src="bootstrap-tagsinput-angular.js"></script>
   <script src="bootstrap-tagsinput.js"></script>
@@ -46,7 +47,7 @@
     <div class="form-group well searchWell">
       <p>To see specific field options, hover over icon next to the field</p>
       <div class="input-group">
-        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Not case sensitive" class="fa fa-search"></span></div>
         <input type="text" class="form-control" ng-model="name" placeholder="Name"/>
       </div>
       <div class="input-group">
@@ -54,11 +55,11 @@
         <input type="text" class="form-control" ng-model="sockets" placeholder="Sockets"/>
       </div>
       <div class="input-group">
-        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Not case sensitive" class="fa fa-search"></span></div>
         <input type="text" class="form-control" ng-model="itemType" placeholder="Item Type"/>
       </div>
       <div class="input-group">
-        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Not case sensitive" class="fa fa-search"></span></div>
         <input type="text" class="form-control" ng-model="properties" placeholder="Properties"/>
       </div>
       <div class="input-group">
@@ -66,7 +67,7 @@
         <input type="text" class="form-control" ng-model="lvlReq" placeholder="Level Requirement"/>
       </div>
       <div class="input-group">
-        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Tagged input with suggested runes" class="fa fa-search"></span></div>
         <input type="text" data-role="tagsinput" class="form-control" id="runes" placeholder="Runes"/>
       </div>
     </div>
@@ -129,6 +130,14 @@
     <div class="modal-content">
       <div class="modal-body">
         <ul>
+          <b>1.0.1.0</b>
+          <li>Now doing custom filtering</li>
+          <li>Runes are now tags</li>
+          <li>Level Requirement support rudimentary math (<, >, <=, >=)</li>
+          <li>Added typeahead on rune tags</li>
+          <li>Added tooltip on icons for each form input</li>
+        </ul>
+        <ul>
           <b>1.0.0.0</b>
           <li>Added Changelog</li>
           <li>Runewords with multiple items now work properply</li>
@@ -137,12 +146,6 @@
           <li>Fixed attributes for Bone</li>
           <li>Added Google Analytics</li>
         </ul>
-        <ul>
-          <b>1.0.1.0</b>
-          <li>Now doing custom filtering</li>
-          <li>Runes are now tags</li>
-          <li>Level Requirement support rudimentary math (<, >, <=, >=)</li>
-          <li>Added info modal that triggers on first load</li>
       </div>
     </div>
   </div>

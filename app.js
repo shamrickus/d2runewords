@@ -3,7 +3,7 @@ angular.module("mainApp", [])
 	$scope.sortName = 'name';
 	$scope.sortReverse = false;
 	$scope.items = data;
-	$scope.runes = {
+	$scope.initRunes = {
 		"El": 
 			{
 				lvl: 11
@@ -144,15 +144,49 @@ angular.module("mainApp", [])
 		'>=': function(x, y) { return x >= y}
 	}
 
+	$scope.substringMatcher = function(strs) {
+	  return function findMatches(q, cb) {
+	    var matches, substringRegex;
+
+	    // an array that will be populated with substring matches
+	    matches = [];
+
+	    // regex used to determine if a string contains the substring `q`
+	    substrRegex = new RegExp(q, 'i');
+
+	    // iterate through the pool of strings and for any string that
+	    // contains the substring `q`, add it to the `matches` array
+	    $.each(strs, function(i, str) {
+	      if (substrRegex.test(str)) {
+	        matches.push(str);
+	      }
+	    });
+
+	    cb(matches);
+	  };
+	};
+
 	$scope.initItems = function(){
 		for(var i = 0; i < $scope.items.length; ++i){
 			let item = $scope.items[i];
 			item.lvlReq = $scope.getLvlReq(item.runes);
 		}
-		$("[placeholder='Runes']:not('bound')").change(function(){
+		$("[placeholder='Runes']:not('.bound')").change(function(){
 			$scope.$apply();
 		}).addClass("bound");
 
+		$("[data-toggle='tooltip']:not('.bound')").each(function(){
+			$(this).tooltip();
+		}).addClass("bound");
+
+		$("#runes").tagsinput({
+			confirmKeys: [13, 188, 32],
+			typeaheadjs: {
+				hint: true,
+				highlight: true,
+				source: $scope.substringMatcher(Object.keys($scope.initRunes))
+			}
+		});
 	}
 
 	$scope.outputRune = function(runes){
@@ -176,7 +210,7 @@ angular.module("mainApp", [])
 
 		for(var i = 0; i < runes.length; ++i){
 			let rune = runes[i];
-			let lvlReq = $scope.runes[rune].lvl;
+			let lvlReq = $scope.initRunes[rune].lvl;
 			if(lvlReq > minLvl) minLvl = lvlReq;
 		}
 
