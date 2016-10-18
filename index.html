@@ -26,6 +26,9 @@
   
   <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"></link>
+
   <script src="bootstrap-tagsinput-angular.js"></script>
   <script src="bootstrap-tagsinput.js"></script>
 
@@ -39,9 +42,8 @@
 <div class="container">
   <div class="well">
   	<h1>Diablo II Runewords</h1>
-  	<p>Made by <a href="https://www.github.com/shamrickus">shamrickus</a>, v 1.0.1.1</p>
-  	<p><a href="https://www.github.com/shamrickus/d2runewords">Source</a></p>
-    <p><a data-toggle="modal" data-target="#changelog">Changelog</a></p>
+  	<p>Made by <a href="https://www.github.com/shamrickus">shamrickus</a> | <a href="https://www.github.com/shamrickus/d2runewords">Source</a> | <a data-toggle="modal" data-target="#changelog">Changelog</a></p>
+    <p id="versionHolder"></p>
   </div>
   <form action="">
     <div class="form-group well searchWell">
@@ -56,15 +58,16 @@
       </div>
       <div class="input-group">
         <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Not case sensitive" class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="itemType" placeholder="Item Type"/>
-      </div>
-      <div class="input-group">
-        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Not case sensitive" class="fa fa-search"></span></div>
         <input type="text" class="form-control" ng-model="properties" placeholder="Properties"/>
       </div>
       <div class="input-group">
         <div class="input-group-addon"><span data-toggle="tooltip" title="" data-placement="bottom" data-original-title="You can either input a number for equality or you can type (<|<=|>|>=) XX" class="fa fa-search"></span></div>
         <input type="text" class="form-control" ng-model="lvlReq" placeholder="Level Requirement"/>
+      </div>
+      <div class="input-group">
+        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Multiselect with searching (not case sensitive)" class="fa fa-search"></span></div>
+        <select id="itemSelect" data-actions-box="true" class="selectpicker" multiple data-live-search="true" ng-model="itemType" title="Item Type">
+        </select>
       </div>
       <div class="input-group">
         <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Tagged input with suggested runes" class="fa fa-search"></span></div>
@@ -129,6 +132,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
+        <ul>
+          <b id="version">1.0.2.0</b>
+          <li>Item Type is now split on "/" to provide more space for other columns</li>
+          <li>Item Type is now a select field</li>
+          <li>Rearranged header fields</li>
+        </ul>
         <ul>
           <b>1.0.1.1</b>
           <li>Links no longer bring you to the top of the page</li>

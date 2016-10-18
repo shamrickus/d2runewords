@@ -40,9 +40,21 @@ a{
 	background-color:lightblue;
 }
 
+.bootstrap-select{
+	padding: 0 !important;
+}
+
+.filter-option{
+	text-transform: none !important;
+}
+
+.dropdown-toggle{
+	padding-left: 12px !important;
+}
+
 
 @media (min-width: 768px) {
-	.input-group, .bootstrap-tagsinput{
+	.input-group, .bootstrap-tagsinput, .bootstrap-select{
 		width:100%;
 	}
 

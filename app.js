@@ -143,6 +143,17 @@ angular.module("mainApp", [])
 		'>': function(x, y) { return x > y},
 		'>=': function(x, y) { return x >= y}
 	}
+	$scope.itemTypes = [];
+
+	/*Model:
+		type:
+		parentCats:
+		maxSockets:
+		tags:
+	*/
+	$scope.itemTypeModel = [{
+
+	}]
 
 	$scope.substringMatcher = function(strs) {
 	  return function findMatches(q, cb) {
@@ -167,10 +178,15 @@ angular.module("mainApp", [])
 	};
 
 	$scope.initItems = function(){
+		let types = [];
 		for(var i = 0; i < $scope.items.length; ++i){
 			let item = $scope.items[i];
 			item.lvlReq = $scope.getLvlReq(item.runes);
+			types = types.concat(item.itemType.replace(/\([A-Za-z0-9\s]+\)/g, "").split("/"));
+			$scope.items[i].itemType = item.itemType.replace(/\//g, "\n");
 		}
+		$scope.itemTypes = types.filter($scope.onlyUnique)
+
 		$("[placeholder='Runes']:not('.bound')").change(function(){
 			$scope.$apply();
 		}).addClass("bound");
@@ -178,6 +194,13 @@ angular.module("mainApp", [])
 		$("[data-toggle='tooltip']:not('.bound')").each(function(){
 			$(this).tooltip();
 		}).addClass("bound");
+
+		$.each($scope.itemTypes, function(key, value) {
+		$("#itemSelect")
+			.append($("<option></option>")
+				.attr("value", value)
+				.text(value));
+		});
 
 		$("#runes").tagsinput({
 			confirmKeys: [13, 188, 32],
@@ -187,6 +210,8 @@ angular.module("mainApp", [])
 				source: $scope.substringMatcher(Object.keys($scope.initRunes))
 			}
 		});
+
+		$("#versionHolder").text("Version " + $("#version").text());
 	}
 
 	$scope.outputRune = function(runes){
@@ -203,6 +228,10 @@ angular.module("mainApp", [])
 		}
 
 		return runeStr;
+	}
+
+	$scope.onlyUnique = function(value, index, self) {
+		return self.indexOf(value) === index;
 	}
 
 	$scope.getLvlReq = function(runes){
@@ -236,8 +265,16 @@ angular.module("mainApp", [])
 		if(testSockets != "" && sockets != testSockets) return false;
 
 		let type = testItem.itemType != undefined ? testItem.itemType.toLowerCase() : "";
-		let testType = $scope.itemType != undefined ? $scope.itemType.toLowerCase() : "";
-		if(!type.includes(testType)) return false;
+		let testType = $scope.itemType != undefined ? $scope.itemType.map(function(x){ return x.toLowerCase();}) : [];
+		let typeFound = false;
+		for(var i = 0; i < testType.length; ++i){
+			let itemType = testType[i];
+			if(type.includes(itemType)){
+				typeFound = true;
+				break;
+			}
+		}
+		if(!typeFound && testType.length != 0) return false;
 
 		$scope.runes = $("#runes").val().toLowerCase().split(",");
 		let runes = testItem.runes.map(function(x){ return x.toLowerCase();});
