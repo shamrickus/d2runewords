@@ -2,6 +2,10 @@
 	text-align:center;
 }
 
+a{
+	cursor:pointer;
+}
+
 .input-group{
 	float: left;
 }
