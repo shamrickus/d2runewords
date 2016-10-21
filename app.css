@@ -1,15 +1,16 @@
-.number, th, td, h1, p{
-	text-align:center;
+.number, th, td, h1, p {
+	text-align: center;
 }
 
-a{
-	cursor:pointer;
+a {
+	cursor: pointer;
 }
 
-.input-group{
+.input-group {
 	float: left;
 }
-.well{
+
+.well {
 	width: 100%;
 }
 
@@ -18,70 +19,68 @@ a{
 	line-height: 17px;
 }
 
-.twitter-typeahead{
-	float:left;
+.twitter-typeahead {
+	float: left;
 }
 
-.tt-open{
-	background-color:white;
+.tt-open {
+	background-color: white;
 	padding: 8px;
 	border-radius: 5px;
-
-
 	-webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.tt-menu{
+.tt-menu {
 	cursor: pointer;
 }
 
-.tt-selectable:hover{
-	background-color:lightblue;
+.tt-selectable:hover {
+	background-color: lightblue;
 }
 
-.bootstrap-select{
+.bootstrap-select {
 	padding: 0 !important;
 }
 
-.filter-option{
+.filter-option {
 	text-transform: none !important;
 }
 
-.dropdown-toggle{
+.dropdown-toggle {
 	padding-left: 12px !important;
+	border: 1px solid #ccc !important;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+	border-radius: 4px !important;
 }
 
-
 @media (min-width: 768px) {
-	.input-group, .bootstrap-tagsinput, .bootstrap-select{
-		width:100%;
+	.input-group, .bootstrap-tagsinput, .bootstrap-select {
+		width: 100%;
 	}
 
-	.searchWell{
-		height:325px;
+	.searchWell {
+		height: 325px;
 	}
 }
 
 @media (min-width: 1200px) {
-	.input-group, .bootstrap-tagsinput{
+	.input-group, .bootstrap-tagsinput {
 		width: 49%;
-		min-width:500px;
+		min-width: 500px;
 	}
 
-	.bootstrap-tagsinput{
+	.bootstrap-tagsinput {
 		width: 100%;
 	}
 
-	.searchWell{
+	.searchWell {
 		height: 200px;
 	}
 }
 
 @media (min-width: 1700px) {
-	.container{
+	.container {
 		width: 1750px;
-	}	
+	}
 }
-
-

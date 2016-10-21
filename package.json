@@ -1,0 +1,32 @@
+{
+  "name": "d2runewords",
+  "version": "1.0.0",
+  "description": "Maintains a list of runewords parsed from arreat summit that you can search over.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shamrickus/d2runewords.git"
+  },
+  "author": "shamrickus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shamrickus/d2runewords/issues"
+  },
+  "homepage": "https://github.com/shamrickus/d2runewords#readme",
+  "dependencies": {
+    "jasmine-node": "^1.14.5"
+  },
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "angular-mocks": "^1.5.8",
+    "jasmine": "^2.5.2",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.0.2"
+  }
+}

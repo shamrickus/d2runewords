@@ -34,9 +34,9 @@
 
   <link rel="stylesheet" href="bootstrap-tagsinput.css"></link>
 
-	<script src="data.js"></script>
-	<script src="app.js"></script>
-	<link rel="stylesheet" href="app.css"></link>
+	<script src="data.js?version=10020"></script>
+	<script src="app.js?version=10020"></script>
+	<link rel="stylesheet" href="app.css?version=10020"></link>
 </head>
 <body ng-app="mainApp">
 <div class="container">
@@ -132,11 +132,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
+        <ul> 
+          <b id="version">1.0.2.1</b>
+          <li>Added jasmine tests (no front end changes)</li>
+        </ul>
         <ul>
-          <b id="version">1.0.2.0</b>
+          <b>1.0.2.0</b>
           <li>Item Type is now split on "/" to provide more space for other columns</li>
           <li>Item Type is now a select field</li>
+          <li>Many tags added for select field</li>
           <li>Rearranged header fields</li>
+          <li>Added versioning to js files so no caching occurs</li>
         </ul>
         <ul>
           <b>1.0.1.1</b>
