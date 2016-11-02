@@ -29,16 +29,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"></link>
 
-  <script src="bootstrap-tagsinput-angular.js"></script>
-  <script src="bootstrap-tagsinput.js"></script>
+  <script src="script/bootstrap-tagsinput-angular.js"></script>
+  <script src="script/bootstrap-tagsinput.js"></script>
 
-  <link rel="stylesheet" href="bootstrap-tagsinput.css"></link>
+  <link rel="stylesheet" href="style/bootstrap-tagsinput.css"></link>
 
-	<script src="data.js?version=10020"></script>
-	<script src="app.js?version=10020"></script>
-	<link rel="stylesheet" href="app.css?version=10020"></link>
+	<script src="script/data.js?version=10030"></script>
+	<script src="script/app.js?version=10030"></script>
+	<link rel="stylesheet" href="style/app.css?version=10030"></link>
 </head>
-<body ng-app="mainApp">
+<body ng-app="mainApp" ng-controller="sortController">
 <div class="container">
   <div class="well">
   	<h1>Diablo II Runewords</h1>
@@ -73,28 +73,46 @@
         <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Tagged input with suggested runes" class="fa fa-search"></span></div>
         <input type="text" data-role="tagsinput" class="form-control" id="runes" placeholder="Runes"/>
       </div>
+      <div class="input-group cb">
+          <label class="label-cont checkbox-inline">
+            <input type="checkbox" ng-model="includeLadder" />Include Ladder Runewords
+          </label>
+          <div>
+            <span>Versions:</span>
+            <label class="checkbox-inline">
+              <input type="checkbox" ng-model="version.orig" />1.09
+            </label>
+            <label class="checkbox-inline">
+              <input type="checkbox" ng-model="version.ot" />1.10
+            </label>
+            <label class="checkbox-inline">
+              <input type="checkbox" ng-model="version.oe" />1.11
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
   </form>
   <div class="well">
-	<table class="table table-striped" ng-controller="sortController" ng-init="initItems()">
+	<table class="table table-striped" ng-init="initItems()">
 	<thead>
       <tr>
         <th>
           <a ng-click="sortName='name';sortReverse=!sortReverse">Name 
-             <span class="fa fa-caret-down" ng-show="!sortReverse"></span>
-             <span class="fa fa-caret-up" ng-show="sortReverse"></span>
+             <span class="fa fa-caret-down" ng-show="!sortReverse && sortName=='name'"></span>
+             <span class="fa fa-caret-up" ng-show="sortReverse && sortName=='name'"></span>
           </a>
         </th>
         <th>
           <a href="javascript:;" ng-click="sortName='sockets';sortReverse=!sortReverse">Sockets
-             <span class="fa fa-caret-down" ng-show="!sortReverse"></span>
-             <span class="fa fa-caret-up" ng-show="sortReverse"></span>
+             <span class="fa fa-caret-down" ng-show="!sortReverse && sortName=='sockets'"></span>
+             <span class="fa fa-caret-up" ng-show="sortReverse && sortName=='sockets'"></span>
           </a>
         </th>
         <th>
           <a href="javascript:;" ng-click="sortName='itemType';sortReverse=!sortReverse">Item Type
-             <span class="fa fa-caret-down" ng-show="!sortReverse"></span>
-             <span class="fa fa-caret-up" ng-show="sortReverse"></span>
+             <span class="fa fa-caret-down" ng-show="!sortReverse && sortName=='itemType'"></span>
+             <span class="fa fa-caret-up" ng-show="sortReverse && sortName=='itemType'"></span>
           </a>
         </th>
         <th>
@@ -105,8 +123,8 @@
         </th>
         <th>
         	<a href="javascript:;" ng-click="sortName='lvlReq';sortReverse=!sortReverse">Lvl Req
-          		<span class="fa fa-caret-down" ng-show="!sortReverse"></span>
-            	<span class="fa fa-caret-up" ng-show="sortReverse"></span>
+          		<span class="fa fa-caret-down" ng-show="!sortReverse && sortName=='lvlReq'"></span>
+            	<span class="fa fa-caret-up" ng-show="sortReverse && sortName=='lvlReq'"></span>
         	</a>
         </th>
       </tr>
@@ -132,8 +150,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
+        <ul>
+          <b id="version">1.0.3.0</b>
+          <li>Added field for ladder only rune words</li>
+          <li>Added field for rune word version</li>
+          <li>Fixed sort arrows such that they show the correct value</li>
+        </ul>
         <ul> 
-          <b id="version">1.0.2.1</b>
+          <b>1.0.2.1</b>
           <li>Added jasmine tests (no front end changes)</li>
         </ul>
         <ul>

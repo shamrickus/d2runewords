@@ -60,7 +60,13 @@ a {
 	}
 
 	.searchWell {
-		height: 325px;
+		height: 350px;
+	}
+
+	.input-group.cb div {
+		float: right;
+		padding-right: 12px;
+		margin-right: 0px;
 	}
 }
 
@@ -75,7 +81,12 @@ a {
 	}
 
 	.searchWell {
-		height: 200px;
+		height: 225px;
+	}
+
+	.input-group.cb div, .input-group.cb label.label-cont {
+		float: left;
+		margin-right: 70px;
 	}
 }
 
@@ -83,4 +94,40 @@ a {
 	.container {
 		width: 1750px;
 	}
+}
+
+.input-group.cb {
+	height: 45px;
+	margin-left: 12px;
+	width: 100%;
+}
+
+.checkbox-inline {
+	line-height: 45px !important;
+	-webkit-touch-callout: none;
+
+	/* iOS Safari */
+	-webkit-user-select: none;
+
+	/* Chrome/Safari/Opera */
+	-khtml-user-select: none;
+
+	/* Konqueror */
+	-moz-user-select: none;
+
+	/* Firefox */
+	-ms-user-select: none;
+
+	/* Internet Explorer/Edge */
+	user-select: none;
+
+	/* Non-prefixed version, currently */
+}
+
+input[type=checkbox] {
+	bottom: 16px;
+}
+
+.input-group span {
+	margin-right: 10px;
 }

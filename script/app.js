@@ -144,70 +144,8 @@ angular.module("mainApp", [])
 		'>=': function(x, y) { return x >= y}
 	}
 	$scope.itemTypes = [];
-
-	/*Model:
-		type:
-		parentCats:
-		maxSockets:
-		tags:
-	*/
-/*	$scope.weaponTags1h = ["1 Handed", "One Handed", "1h", "1handed"]
-	$scope.weaponTags2h = ["2 Handed", "Two Handed", "2h", "1handed"]
-	$scope.itemTypeCategories = ["Maces", "Weapons", "Melee Weapons", "Missle Weapons", "Helms", "Body Armor", "Shields"];
-	$scope.itemTypeModel = [{
-		type: "Axes",
-		parentCats: ["Weapons", "Melee Weapons"],
-		maxSockets: 6,
-		tags: ["Axes"].concat($scope.weaponTags1h, $scope.weaponTags2h, this.parentCats)
-	},
-	{
-		type: "Swords",
-		parentCats: ["Weapons", "Melee Weapons"],
-		maxSockets: 6,
-		tags: ["Swords"].concat($scope.weaponTags1h, $scope.weaponTags2h, this.parentCats)
-	},
-	{
-		type: "Scepters",
-		parentCats: ["Weapons", "Melee Weapons"],
-		maxSockets: 5,
-		tags: ["Scepters"].concat($scope.weaponTags1h this.parentCats)
-	},
-	{
-		type: "Clubs",
-		parentCats: ["Weapons", "Melee Weapons", "Maces"],
-		maxSockets: 6,
-		tags: ["Clubs"].concat($scope.weaponTags1h, $scope.weaponTags2h, this.parentCats)
-	},
-	{
-		type: "Maces",
-		parentCats: ["Weapons", "Melee Weapons", "Maces"],
-		maxSockets: 3,
-		tags: ["Maces"].concat($scope.weaponTags1h, this.parentCats)
-	},
-	{
-		type: "Hammers",
-		parentCats: ["Weapons", "Melee Weapons", "Maces"],
-		maxSockets: 4,
-		tags: ["Hammers"].concat($scope.weaponTags1h, this.parentCats)
-	},
-	{
-		type: "Claws",
-		parentCats: ["Weapons", "Melee Weapons", "Katar", "Assassin"],
-		maxSockets: 3,
-		tags: ["Claws"].concat($scope.weaponTags1h, this.parentCats)
-	},
-	{
-		type: "Polearms",
-		parentCats: ["Weapons", "Melee Weapons"],
-		maxSockets: 6,
-		tags: ["Polearms"].concat($scope.weaponTags2h, this.parentCats)
-	},
-	{
-		type: "Staves",
-		parentCats: ["Weapons", "Melee Weapons"],
-		maxSockets: 6,
-		tags: ["Staves", "Staff"].concat($scope.weaponTags1h, $scope.waeponTags2h, this.parentCats)
-	}]*/
+	$scope.includeLadder = true;
+	$scope.version = {orig: true, ot: true, oe: true};
 
 	$scope.substringMatcher = function(strs) {
 	  return function findMatches(q, cb) {
@@ -266,6 +204,7 @@ angular.module("mainApp", [])
 		});
 
 		$("#versionHolder").text("Version " + $("#version").text());
+
 	}
 
 	$scope.outputRune = function(runes){
@@ -350,6 +289,16 @@ angular.module("mainApp", [])
 			else if(!lvl.includes(testLvl)) return false;
 		}
 
+		let version = testItem.version.toString();
+		let testVersion = [];
+		if($scope.version.orig) testVersion.push("1.09");
+		if($scope.version.ot) testVersion.push("1.1");
+		if($scope.version.oe) testVersion.push("1.11");
+		if(testVersion.indexOf(version) == -1) return false;
+
+		let ladder = testItem.ladder;
+		let testLadder = $scope.includeLadder;
+		if(testLadder == false && ladder == true) return false;
 
 		let properties = testItem.properties.map(function(val){return val.toLowerCase();});
 		let testProps = $scope.properties != undefined ? $scope.properties.toLowerCase() : "";

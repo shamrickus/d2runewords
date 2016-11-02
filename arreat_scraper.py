@@ -4,7 +4,10 @@ from HTMLParser import HTMLParser
 skipTags = ["a"]
 classes = ["Amazon", "Barbarian", "Paladin", "Sorceress", "Druid", "Assassin", "Necromancer"]
 items = []
+debug = False
+globLadder = False
 urls = ["http://classic.battle.net/diablo2exp/items/runewords-original.shtml", "http://classic.battle.net/diablo2exp/items/runewords-110.shtml", "http://classic.battle.net/diablo2exp/items/runewords-111.shtml"]
+version = 1.09
 
 class ItemParser:
 	def __init__(self, name = None, sockets = None, runes = [], itemType = None):
@@ -14,6 +17,9 @@ class ItemParser:
 		self.runes = runes
 		self.properties = []
 		self.name = name
+
+		self.version = version
+		self.ladder = globLadder
 
 		self.first = False
 
@@ -46,7 +52,7 @@ class ItemParser:
 		elif(runePattern.match(data)):
 			self.runes = data.split(" + ")
 		#else:
-			#print("Data: ", data, "Index: ", index, "lastTag: ", lastTag)
+		#	print("Data: ", data, "Index: ", index, "lastTag: ", lastTag)
 
 class MyHTMLParser(HTMLParser):
 	def __init__(self):
@@ -93,6 +99,7 @@ class MyHTMLParser(HTMLParser):
 
 	#This the data inbetween attributes
 	def handle_data(self, data):
+		global globLadder
 		data = data.rstrip()
 		if(self.lastTag in skipTags):
 			return
@@ -100,10 +107,14 @@ class MyHTMLParser(HTMLParser):
 		ignoreRW = ["Spirit", "Phoenix", "Fortitude"]
 		ignoreExtra = ["Weapons", "Body Armor", "Shields"]
 
+		if(self.columnNumber == 0 and self.lastTag == None and data == "The following Rune Words will only work on the Battle.net Realms for Ladder Characters only. They will not work for single oropen characters or non-ladder characters"):
+			globLadder = True
+
 		if(self.inTd):
 			if(self.columnNumber == 0 and not self.tempItem.blank() and self.tempItem.name != None and self.tempItem.sockets != None):
 					items.append(self.tempItem)
 					self.tempItem = ItemParser()
+
 
 			#This if statement is not needed, but it makes the code clearer
 			if(data in ignoreRW):
@@ -120,6 +131,7 @@ class MyHTMLParser(HTMLParser):
 				runes = self.tempItem.runes
 				itemType = data
 
+				self.tempItem.ladder = globLadder
 				items.append(self.tempItem)
 				self.tempItem = ItemParser(name, sockets, runes, itemType)
 
@@ -140,16 +152,22 @@ if __name__ == "__main__":
 	mhp = MyHTMLParser()
 	print "Calculating..."
 
-	if(len(sys.argv) < 3):
-		for url in urls:
-			mhp.feed(getFeed(url))
+	if(len(sys.argv) == 2 and sys.argv[1] == "debug"):
+		debug = True
+
+	for url in urls:
+		mhp = MyHTMLParser()
+		mhp.feed(getFeed(url))
+		if(not mhp.tempItem.blank()):
+			items.append(mhp.tempItem)
+		globLadder = False
+		version += 0.01
+
+	if(not debug):
+		file = open("script/data.js", "w")
+		file.write("let data = [];\n")
+		for item in items:
+			wrtieJSON(json.dumps(item.__dict__))
+		file.close()
 	else:
-		mhp.feed(getFeed(sys.argv[1]))
-
-	items.append(mhp.tempItem)
-
-	file = open("data.js", "w")
-	file.write("let data = [];\n")
-	for item in items:
-		wrtieJSON(json.dumps(item.__dict__))
-	file.close()
+		print("Found debug flag, not outputting")

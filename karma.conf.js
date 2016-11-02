@@ -19,7 +19,7 @@ module.exports = function(config) {
       'node_modules/bootstrap/dist/js/boostrap.js',
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      '*.js',
+      'script/*.js',
       'spec/*Spec.js'
     ],
 

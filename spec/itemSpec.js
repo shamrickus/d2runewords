@@ -221,6 +221,7 @@ describe("sortController", function() {
 				expect(results.length).toEqual(23);
 			});
 
+
 			it("lvl req filter", function(){
 				$scope.lvlReq = 3;
 
