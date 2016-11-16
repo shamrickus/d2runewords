@@ -137,6 +137,7 @@ angular.module("mainApp", [])
 				lvl: 69
 			}
 	};
+	$scope.testRunes = [];
 	$scope.math = {
 		'<': function(x, y) { return x < y },
 		'<=': function(x , y) { return x <= y},
@@ -144,8 +145,11 @@ angular.module("mainApp", [])
 		'>=': function(x, y) { return x >= y}
 	}
 	$scope.itemTypes = [];
+	$scope.runesStrict = false;
 	$scope.includeLadder = true;
 	$scope.version = {orig: true, ot: true, oe: true};
+	$scope.mathRegex = new RegExp(/(((\<\=|\<)\s[0-9]+)|((\>\=|\>)\s[0-9]+))/);
+
 
 	$scope.substringMatcher = function(strs) {
 	  return function findMatches(q, cb) {
@@ -248,15 +252,34 @@ angular.module("mainApp", [])
 		}
 	}
 
-	$scope.checkFilters = function(testItem){
+	$scope.sort = function(column) {
+		if ($scope.sortName == column) $scope.sortReverse = !$scope.sortReverse;
+		else {
+			$scope.sortName = column;
+			$scope.sortReverse = false;
+		}
+	}
+
+	$scope.handleName = function(testItem) {
 		let name = testItem.name != undefined ? testItem.name.toLowerCase() : "";
 		let testName = $scope.name != undefined ? $scope.name.toLowerCase() : "";
 		if(!name.includes(testName)) return false;
+	}
 
-		let sockets = testItem.sockets != undefined ? testItem.sockets : "";
-		let testSockets = $scope.sockets != undefined ? $scope.sockets : "";
-		if(testSockets != "" && sockets != testSockets) return false;
+	$scope.handleSockets = function(testItem) {
+		let sockets = testItem.sockets.toString();
+		let testSockets = $scope.sockets != undefined ? $scope.sockets.toString() : "";
 
+		if (testSockets != "") {
+			if ($scope.mathRegex.test(testSockets)) {
+				var data = testSockets.split(" ");
+				if (!$scope.math[data[0]](sockets, data[1])) return false;
+			}
+			else if (!sockets.includes(testSockets)) return false;
+		}
+	}
+
+	$scope.handleType = function (testItem) {
 		let type = testItem.itemType != undefined ? testItem.itemType.toLowerCase() : "";
 		let testType = $scope.itemType != undefined ? $scope.itemType.map(function(x){ return x.toLowerCase();}) : [];
 		let typeFound = false;
@@ -268,38 +291,61 @@ angular.module("mainApp", [])
 			}
 		}
 		if(!typeFound && testType.length != 0) return false;
+	}
 
-		$scope.runes = $("#runes").val() != undefined ? $("#runes").val().toLowerCase().split(",") : $scope.initRunes;
+	$scope.handleRunes = function(testItem) {
+		//$scope.testRunes is the default option for testing, should never happen in production
+		$scope.runes = $("#runes").val() != undefined ? $("#runes").val().toLowerCase().split(",") : $scope.testRunes.map(function(x){ return x.toLowerCase();});
+		while($scope.runes[$scope.runes.length - 1] == "") $scope.runes.splice($scope.runes.length - 1, 1);
+		if($scope.runes.length == 0) return true;
+
 		let runes = testItem.runes.map(function(x){ return x.toLowerCase();});
-		for(var i = 0; i < $scope.runes.length; ++i){
-			let rune = $scope.runes[i];
-			if(rune === "") continue;
-			if(runes.indexOf(rune) == -1) return false;
+		if ($scope.runesStrict) {
+			for(var i = 0; i < $scope.runes.length; ++i){
+				let rune = $scope.runes[i];
+				if(rune === "") continue;
+				if(runes.indexOf(rune) == -1) return false;
+			}
+		} 
+		else {
+			for(var i = 0; i < runes.length; ++i) {
+				let rune = runes[i];
+				if(rune === "") continue;
+				if($scope.runes.indexOf(rune) > -1) return true;
+			}
+			return false;			
 		}
+	}
 
+	$scope.handleLvl = function (testItem) {
 		let lvl = testItem.lvlReq.toString();
 		let testLvl = $scope.lvlReq != undefined ? $scope.lvlReq : "";
 
-		let mathRegex = new RegExp(/(((\<\=|\<)\s[0-9]+)|((\>\=|\>)\s[0-9]+))/);
 		if(testLvl != ""){
-			if(mathRegex.test(testLvl)){
+			if($scope.mathRegex.test(testLvl)){
 				var data = testLvl.split(" ");
 				if(!$scope.math[data[0]](lvl, data[1])) return false;
 			}
 			else if(!lvl.includes(testLvl)) return false;
 		}
+	}
 
+	$scope.handleVersion = function(testItem) {
 		let version = testItem.version.toString();
 		let testVersion = [];
 		if($scope.version.orig) testVersion.push("1.09");
 		if($scope.version.ot) testVersion.push("1.1");
 		if($scope.version.oe) testVersion.push("1.11");
 		if(testVersion.indexOf(version) == -1) return false;
+	}
 
+	$scope.handleLadder = function(testItem) {
 		let ladder = testItem.ladder;
 		let testLadder = $scope.includeLadder;
 		if(testLadder == false && ladder == true) return false;
+	}
 
+	$scope.handleProp = function (testItem) {
 		let properties = testItem.properties.map(function(val){return val.toLowerCase();});
 		let testProps = $scope.properties != undefined ? $scope.properties.toLowerCase() : "";
 		let propFound = true;
@@ -314,5 +360,20 @@ angular.module("mainApp", [])
 			}
 		}
 		return propFound;
+	}
+
+	$scope.checkFilters = function(testItem){
+		results = [];
+		results.push($scope.handleName(testItem));
+		results.push($scope.handleSockets(testItem));
+		results.push($scope.handleType(testItem));
+		results.push($scope.handleRunes(testItem));
+		results.push($scope.handleLvl(testItem));
+		results.push($scope.handleVersion(testItem));
+		results.push($scope.handleLadder(testItem));
+		results.push($scope.handleProp(testItem));
+		
+		if(results.indexOf(false) > -1) return false;
+		else return true;
 	}
 }]);	

@@ -211,6 +211,22 @@ describe("sortController", function() {
 				let results = applyFilter($scope);
 
 				expect(results.length).toEqual(28);
+
+				$scope.sockets = "< 3";
+				results = applyFilter($scope);
+				expect(results.length).toEqual(13);
+
+				$scope.sockets = "<= 3";
+				results = applyFilter($scope);
+				expect(results.length).toEqual(41);
+
+				$scope.sockets = "> 3";
+				results = applyFilter($scope);
+				expect(results.length).toEqual(40);
+
+				$scope.sockets = ">= 3";
+				results = applyFilter($scope);
+				expect(results.length).toEqual(68);
 			});
 
 			it("item type filter", function(){
@@ -221,6 +237,29 @@ describe("sortController", function() {
 				expect(results.length).toEqual(23);
 			});
 
+			it("strict rune filter", function(){
+				$scope.runesStrict = true;
+				$scope.testRunes = ["Zod"];
+
+				let results = applyFilter($scope);
+
+				expect(results.length).toEqual(1);
+
+				$scope.testRunes = ["Zod", "Ber"];
+
+				results = applyFilter($scope);
+
+				expect(results.length).toEqual(0);
+			});
+
+			it("rune filter", function(){
+				$scope.runesStrict = false;
+				$scope.testRunes = ["Zod", "Vex"];
+
+				let results = applyFilter($scope);
+
+				expect(results.length).toEqual(8);
+			});
 
 			it("lvl req filter", function(){
 				$scope.lvlReq = 3;

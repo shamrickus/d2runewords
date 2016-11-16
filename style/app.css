@@ -71,8 +71,13 @@ a {
 }
 
 @media (min-width: 768px) {
-	.input-group, .bootstrap-tagsinput, .bootstrap-select {
+	.input-group, .bootstrap-select {
 		width: 100%;
+	}
+
+	.bootstrap-tagsinput {
+		width: 570px;
+		margin-right: 5px;
 	}
 
 	.input-group, button.dropdown-toggle {
@@ -80,7 +85,7 @@ a {
 	}
 
 	.searchWell {
-		height: 350px;
+		height: 360px;
 	}
 
 	.input-group.cb div {
@@ -96,9 +101,14 @@ a {
 }
 
 @media (min-width: 1200px) {
-	.input-group, .bootstrap-tagsinput {
+	.input-group {
 		width: 49%;
 		min-width: 500px;
+	}
+
+	.bootstrap-tagsinput {
+		width: 715px;
+		margin-right: 5px;
 	}
 
 	.bootstrap-select > .dropdown-toggle {
@@ -106,16 +116,12 @@ a {
 		max-width: 777px !important;
 	}
 
-	.bootstrap-tagsinput {
-		width: 100%;
-	}
-
 	button.dropdown-toggle {
 		max-width: 100%;
 	}
 
 	.searchWell {
-		height: 225px;
+		height: 235px;
 	}
 
 	.input-group.cb div, .input-group.cb label.label-cont {

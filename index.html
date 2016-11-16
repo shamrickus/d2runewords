@@ -34,9 +34,9 @@
 
   <link rel="stylesheet" href="style/bootstrap-tagsinput.css"></link>
 
-	<script src="script/data.js?version=10033"></script>
-	<script src="script/app.js?version=10033"></script>
-	<link rel="stylesheet" href="style/app.css?version=10033"></link>
+	<script src="script/data.js?version=10040"></script>
+	<script src="script/app.js?version=10040"></script>
+	<link rel="stylesheet" href="style/app.css?version=10040"></link>
 
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -56,7 +56,7 @@
         <input type="text" class="form-control" ng-model="name" placeholder="Name"/>
       </div>
       <div class="input-group">
-        <div class="input-group-addon"><span class="fa fa-search"></span></div>
+        <div class="input-group-addon"><span data-toggle="tooltip" title="" data-placement="bottom" data-original-title="You can either input a number for equality or you can type (<|<=|>|>=) XX" class="fa fa-search"></span></div>
         <input type="text" class="form-control" ng-model="sockets" placeholder="Sockets"/>
       </div>
       <div class="input-group">
@@ -75,6 +75,9 @@
       <div class="input-group">
         <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Tagged input with suggested runes" class="fa fa-search"></span></div>
         <input type="text" data-role="tagsinput" class="form-control" id="runes" placeholder="Runes"/>
+        <label class="label-cont checkbox-inline" data-toggle="tooltip" data-placement="bottom" data-original-title="If enabled, only show runewords that contain all of the selected runes">
+           <input type="checkbox" ng-model="runesStrict" />Strict
+        </label>
       </div>
       <div class="input-group cb">
           <label class="label-cont checkbox-inline">
@@ -100,19 +103,19 @@
 	<thead>
       <tr>
         <th>
-          <a ng-click="sortName='name';sortReverse=!sortReverse">Name 
+          <a ng-click="sort('name')">Name 
              <span class="fa fa-caret-down" ng-show="!sortReverse && sortName=='name'"></span>
              <span class="fa fa-caret-up" ng-show="sortReverse && sortName=='name'"></span>
           </a>
         </th>
         <th>
-          <a href="javascript:;" ng-click="sortName='sockets';sortReverse=!sortReverse">Sockets
+          <a href="javascript:;" ng-click="sort('sockets')">Sockets
              <span class="fa fa-caret-down" ng-show="!sortReverse && sortName=='sockets'"></span>
              <span class="fa fa-caret-up" ng-show="sortReverse && sortName=='sockets'"></span>
           </a>
         </th>
         <th>
-          <a href="javascript:;" ng-click="sortName='itemType';sortReverse=!sortReverse">Item Type
+          <a href="javascript:;" ng-click="sort('itemType')">Item Type
              <span class="fa fa-caret-down" ng-show="!sortReverse && sortName=='itemType'"></span>
              <span class="fa fa-caret-up" ng-show="sortReverse && sortName=='itemType'"></span>
           </a>
@@ -124,7 +127,7 @@
           <a href="javascript:;" class="noselect">Properties</a>
         </th>
         <th>
-        	<a href="javascript:;" ng-click="sortName='lvlReq';sortReverse=!sortReverse">Lvl Req
+        	<a href="javascript:;" ng-click="sort('lvlReq')">Lvl Req
           		<span class="fa fa-caret-down" ng-show="!sortReverse && sortName=='lvlReq'"></span>
             	<span class="fa fa-caret-up" ng-show="sortReverse && sortName=='lvlReq'"></span>
         	</a>
@@ -152,8 +155,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
+        <ul> 
+          <b id="version">1.0.4.0</b>
+          <li>Added strict options to runes</li>
+          <li>Fixed sorting to restart when changing column</li>
+          <li>Refactor filter code in anticipation of change to item type</li>
+          <li>Added level requirement math to sockets</li>
+        </ul>
         <ul>
-          <b id="version">1.0.3.3</b>
+          <b>1.0.3.3</b>
           <li>Fixed confusing styling on table headers (non-sortable columns look like sortable columns)</li>
           <li>Added a favicon</li>
         </ul>
