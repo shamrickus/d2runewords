@@ -34,9 +34,12 @@
 
   <link rel="stylesheet" href="style/bootstrap-tagsinput.css"></link>
 
-	<script src="script/data.js?version=10032"></script>
-	<script src="script/app.js?version=10032"></script>
-	<link rel="stylesheet" href="style/app.css?version=10032"></link>
+	<script src="script/data.js?version=10033"></script>
+	<script src="script/app.js?version=10033"></script>
+	<link rel="stylesheet" href="style/app.css?version=10033"></link>
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body ng-app="mainApp" ng-controller="sortController">
 <div class="container">
@@ -115,10 +118,10 @@
           </a>
         </th>
         <th>
-          <a href="javascript:;">Runes</a>
+          <a href="javascript:;" class="noselect">Runes</a>
         </th>
         <th>
-          <a href="javascript:;">Properties</a>
+          <a href="javascript:;" class="noselect">Properties</a>
         </th>
         <th>
         	<a href="javascript:;" ng-click="sortName='lvlReq';sortReverse=!sortReverse">Lvl Req
@@ -150,7 +153,12 @@
     <div class="modal-content">
       <div class="modal-body">
         <ul>
-          <b id="version">1.0.3.2</b>
+          <b id="version">1.0.3.3</b>
+          <li>Fixed confusing styling on table headers (non-sortable columns look like sortable columns)</li>
+          <li>Added a favicon</li>
+        </ul>
+        <ul>
+          <b>1.0.3.2</b>
           <li>Fixed varius styling issues</li>
         </ul>
         <ul>

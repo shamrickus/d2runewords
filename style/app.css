@@ -59,6 +59,17 @@ a {
 	border-radius: 4px !important;
 }
 
+.noselect:hover {
+	cursor: default;
+	text-decoration: none;
+}
+
+.noselect:focus {
+	cursor: default;
+	text-decoration: none;
+	outline: none;
+}
+
 @media (min-width: 768px) {
 	.input-group, .bootstrap-tagsinput, .bootstrap-select {
 		width: 100%;
