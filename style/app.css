@@ -26,9 +26,14 @@ a {
 .tt-open {
 	background-color: white;
 	padding: 8px;
+	padding-right: 18px;
 	border-radius: 5px;
 	-webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn.dropdown-toggle:active {
+	margin-bottom: 7px !important;
 }
 
 .tt-menu {
@@ -59,6 +64,10 @@ a {
 		width: 100%;
 	}
 
+	.input-group, button.dropdown-toggle {
+		max-width: 100%;
+	}
+
 	.searchWell {
 		height: 350px;
 	}
@@ -68,6 +77,11 @@ a {
 		padding-right: 12px;
 		margin-right: 0px;
 	}
+
+	.bootstrap-select > .dropdown-toggle {
+		width: 635px !important;
+		max-width: 635px !important;
+	}
 }
 
 @media (min-width: 1200px) {
@@ -76,8 +90,17 @@ a {
 		min-width: 500px;
 	}
 
+	.bootstrap-select > .dropdown-toggle {
+		width: 777px !important;
+		max-width: 777px !important;
+	}
+
 	.bootstrap-tagsinput {
 		width: 100%;
+	}
+
+	button.dropdown-toggle {
+		max-width: 100%;
 	}
 
 	.searchWell {
@@ -94,6 +117,10 @@ a {
 	.container {
 		width: 1750px;
 	}
+}
+
+.filter-option {
+	word-wrap: normal;
 }
 
 .input-group.cb {
