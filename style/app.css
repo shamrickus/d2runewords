@@ -143,12 +143,12 @@ a {
 	}
 
 	.bootstrap-select > .dropdown-toggle {
-		width: 490 px !important;
+		width: 490px !important;
 		max-width: 500px !important;
 	}
 
 	.searchWell {
-		height: 235px;
+		height: 265px;
 	}
 
 	.input-group.cb div, .input-group.cb label.label-cont {
