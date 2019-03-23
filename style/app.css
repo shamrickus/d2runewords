@@ -2,6 +2,10 @@
 	text-align: center;
 }
 
+body {
+	min-width: 776px;
+}
+
 a {
 	cursor: pointer;
 }
@@ -70,34 +74,32 @@ a {
 	outline: none;
 }
 
-@media (min-width: 768px) {
-	.input-group, .bootstrap-select {
-		width: 100%;
-	}
+.input-group, .bootstrap-select {
+    width: 100%;
+}
 
-	.bootstrap-tagsinput {
-		width: 570px;
-		margin-right: 5px;
-	}
+.bootstrap-tagsinput {
+    width: 570px;
+    margin-right: 5px;
+}
 
-	.input-group, button.dropdown-toggle {
-		max-width: 100%;
-	}
+.input-group, button.dropdown-toggle {
+    max-width: 100%;
+}
 
-	.searchWell {
-		height: 360px;
-	}
+.searchWell {
+    height: 395px;
+}
 
-	.input-group.cb div {
-		float: right;
-		padding-right: 12px;
-		margin-right: 0px;
-	}
+.input-group.cb div {
+    float: right;
+    padding-right: 12px;
+    margin-right: 0px;
+}
 
-	.bootstrap-select > .dropdown-toggle {
-		width: 635px !important;
-		max-width: 635px !important;
-	}
+.bootstrap-select > .dropdown-toggle {
+    width: 635px !important;
+    max-width: 635px !important;
 }
 
 @media (min-width: 992px) {
@@ -116,7 +118,7 @@ a {
 	}
 
 	.searchWell {
-		height: 360px;
+		height: 395px;
 	}
 
 	.input-group.cb div {
