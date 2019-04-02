@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "servertest": "karma start --reporters teamcity --browsers ChromeHeadless --single-run --colors false"
+    "servertest": "./node_modules/.bin/karma start --reporters teamcity --browsers ChromeHeadless --single-run --colors false"
   },
   "repository": {
     "type": "git",
