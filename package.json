@@ -4,8 +4,9 @@
   "description": "Maintains a list of runewords parsed from arreat summit that you can search over.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "servertest": "./node_modules/.bin/karma start --reporters teamcity --single-run --colors false"
+    "test": "./node_modules/.bin/karma start --single-run",
+    "servertest": "./node_modules/.bin/karma start --reporters teamcity --single-run --colors false",
+    "audit": "./node_modules/.bin/npm-audit-ci --moderate"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
-    "karma-teamcity-reporter": "^1.1.0"
+    "karma-teamcity-reporter": "^1.1.0",
+    "npm-audit-ci": "^1.2.0"
   }
 }
