@@ -234,7 +234,7 @@ describe("sortController", function() {
 
 				let results = applyFilter($scope);
 
-				expect(results.length).toEqual(23);
+				expect(results.length).toEqual(22);
 			});
 
 			it("strict rune filter", function(){
