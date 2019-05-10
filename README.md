@@ -1,4 +1,4 @@
-[![Build Status](https://superphage.us:8443/app/rest/builds/buildType\(id:D2runewords_Build\)/statusIcon)](https://superphage.us:8443/viewType.html?buildTypeId=D2runewords_Build&guest=1)
+[![Build Status](https://ic.superphage.org/app/rest/builds/buildType:\(id:D2runewords_Tests\)/statusIcon)](https://ic.superphage.org/viewType.html?buildTypeId=D2runewords_Tests&guest=1)
 
 # d2runewords
 
