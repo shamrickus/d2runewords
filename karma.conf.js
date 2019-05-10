@@ -17,7 +17,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/jquery/dist/jquery.js',
-      'node_modules/bootstrap/dist/js/boostrap.js',
+      'node_modules/bootstrap/dist/js/bootstrap.js',
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'script/*.js',
@@ -61,7 +61,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['ChromeHeadlessDangerous'],
+    browsers: ['ChromeHeadlessDangerous', 'ChromeHeadless'],
     customLaunchers: {
       ChromeHeadlessDangerous: {
         base: 'ChromeHeadless',

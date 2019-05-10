@@ -49,12 +49,12 @@ angular.module("mainApp", [])
 	$scope.runesStrict = false;
 	$scope.includeLadder = true;
 	$scope.version = {orig: true, ot: true, oe: true};
-	$scope.mathRegex = new RegExp(/(((\<\=|\<)\s[0-9]+)|((\>\=|\>)\s[0-9]+))/);
+	$scope.mathRegex = new RegExp(/(((<=|<)\s[0-9]+)|((>=|>)\s[0-9]+))/);
 
 
 	$scope.substringMatcher = function(strs) {
 	  return function findMatches(q, cb) {
-	    var matches, substringRegex;
+	    var matches;
 
 	    // an array that will be populated with substring matches
 	    matches = [];
