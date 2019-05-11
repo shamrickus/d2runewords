@@ -1,6 +1,6 @@
 // Karma configuration
 // Generated on Fri Oct 21 2016 12:00:27 GMT-0600 (Mountain Daylight Time)
-process.env.CHROME_BIN = "/usr/bin/chromium-browser";
+process.env.CHROME_BIN = require('puppeteer').executablePath()
 
 module.exports = function(config) {
   config.set({
@@ -20,6 +20,7 @@ module.exports = function(config) {
       'node_modules/bootstrap/dist/js/bootstrap.js',
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
+      'script/data.js',
       'script/*.js',
       'spec/*Spec.js'
     ],
@@ -61,7 +62,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['ChromeHeadlessDangerous', 'ChromeHeadless'],
+    browsers: ['ChromeHeadlessDangerous'],
     customLaunchers: {
       ChromeHeadlessDangerous: {
         base: 'ChromeHeadless',

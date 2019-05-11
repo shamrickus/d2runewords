@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "./node_modules/.bin/karma start --browsers ChromeHeadless --single-run",
+    "tests": "./node_modules/.bin/karma start --browsers ChromeHeadless",
     "servertest": "./node_modules/.bin/karma start --reporters teamcity --single-run --colors false",
     "audit": "./node_modules/.bin/npm-audit-ci --moderate"
   },
@@ -23,6 +24,7 @@
     "angular": "^1.7.8",
     "angular-mocks": "^1.7.8",
     "bootstrap": "^3.3.5",
+    "grunt": "^1.0.4",
     "gulp-livereload": "^4.0.1",
     "jasmine": "^3.4.0",
     "jasmine-core": "^3.4.0",
@@ -33,6 +35,6 @@
     "karma-jasmine": "^2.0.1",
     "karma-teamcity-reporter": "^1.1.0",
     "npm-audit-ci": "^1.2.0",
-    "grunt": "^1.0.4"
+    "puppeteer": "^1.15.0"
   }
 }
