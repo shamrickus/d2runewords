@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/karma start --browsers ChromeHeadless --single-run",
     "tests": "./node_modules/.bin/karma start --browsers ChromeHeadless",
-    "servertest": "./node_modules/.bin/karma start --reporters teamcity --single-run --colors false",
+    "servertest": "./node_modules/.bin/karma start --browsers ChromeHeadlessDangerous --reporters teamcity --single-run --colors false",
     "audit": "./node_modules/.bin/npm-audit-ci --moderate"
   },
   "repository": {
