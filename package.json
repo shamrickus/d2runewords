@@ -30,7 +30,7 @@
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^2.0.0",
-    "karma-jasmine": "^1.0.2",
+    "karma-jasmine": "^2.0.0",
     "karma-teamcity-reporter": "^1.1.0",
     "npm-audit-ci": "^1.2.0"
   }
