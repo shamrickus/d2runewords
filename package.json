@@ -24,7 +24,6 @@
     "angular": "^1.7.8",
     "angular-mocks": "^1.7.8",
     "bootstrap": "^3.3.5",
-    "grunt": "^1.0.4",
     "jasmine": "^2.5.2",
     "jasmine-core": "^2.5.2",
     "jquery": "^3.4.1",
