@@ -10,8 +10,10 @@ a {
 	cursor: pointer;
 }
 
-.input-group {
+.form-group {
 	float: left;
+    margin-top: 25px;
+    margin-right: 5px;
 }
 
 .well {
@@ -25,6 +27,20 @@ a {
 
 .twitter-typeahead {
 	float: left;
+}
+
+.checkbox {
+    float: left;
+	margin: auto;
+}
+
+.strictLabel {
+	float: right;
+	height: 100%;
+}
+
+.strictLabel label {
+	line-height: 45px !important;
 }
 
 .tt-open {
@@ -74,27 +90,28 @@ a {
 	outline: none;
 }
 
-.input-group, .bootstrap-select {
+.form-group, .bootstrap-select {
     width: 100%;
+}
+
+
+.runeFormGroup {
+	height: 45px;
 }
 
 .bootstrap-tagsinput {
     width: 570px;
     margin-right: 5px;
+	height: 38px;
+	line-height: 38px;
 }
 
-.input-group, button.dropdown-toggle {
+.form-group, button.dropdown-toggle {
     max-width: 100%;
 }
 
 .searchWell {
-    height: 395px;
-}
-
-.input-group.cb div {
-    float: right;
-    padding-right: 12px;
-    margin-right: 0px;
+    height: 555px;
 }
 
 .bootstrap-select > .dropdown-toggle {
@@ -103,7 +120,7 @@ a {
 }
 
 @media (min-width: 992px) {
-	.input-group, .bootstrap-select {
+	.form-group, .bootstrap-select {
 		width: 100%;
 	}
 
@@ -112,19 +129,19 @@ a {
 		margin-right: 5px;
 	}
 
-	.input-group, button.dropdown-toggle {
+	.form-group, button.dropdown-toggle {
 		max-width: 100%;
 		min-width: 100%;
 	}
 
 	.searchWell {
-		height: 395px;
+		height: 555px;
 	}
 
-	.input-group.cb div {
-		float: right;
-		padding-right: 12px;
-		margin-right: 0px;
+	.form-group.half {
+		width: 49%;
+        min-width: 49%;
+		max-width: 49%;
 	}
 
 	.bootstrap-select > .dropdown-toggle {
@@ -134,7 +151,7 @@ a {
 }
 
 @media (min-width: 1200px) {
-	.input-group {
+	.form-group {
 		width: 49%;
 		min-width: 500px;
 	}
@@ -150,12 +167,7 @@ a {
 	}
 
 	.searchWell {
-		height: 265px;
-	}
-
-	.input-group.cb div, .input-group.cb label.label-cont {
-		float: left;
-		margin-right: 70px;
+		height: 340px;
 	}
 }
 
@@ -174,14 +186,7 @@ a {
 	word-wrap: normal;
 }
 
-.input-group.cb {
-	height: 45px;
-	margin-left: 12px;
-	width: 100%;
-}
-
 .checkbox-inline {
-	line-height: 45px !important;
 	-webkit-touch-callout: none;
 
 	/* iOS Safari */
@@ -198,14 +203,28 @@ a {
 
 	/* Internet Explorer/Edge */
 	user-select: none;
-
-	/* Non-prefixed version, currently */
 }
 
 input[type=checkbox] {
 	bottom: 16px;
 }
 
-.input-group span {
+.form-group span {
 	margin-right: 10px;
+}
+
+.form-group.half {
+	width: 49%;
+}
+
+.form-group.mult span {
+    line-height: 29px;
+}
+
+.form-group.mult .checkbox {
+	margin: auto 15px auto auto;
+}
+
+.form-group.mult {
+
 }

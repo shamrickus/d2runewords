@@ -46,6 +46,7 @@ angular.module("mainApp", [])
 		'>=': function(x, y) { return x >= y}
 	}
 	$scope.itemTypes = [];
+	$scope.oldItemTypes = [];
 	$scope.runesStrict = false;
 	$scope.includeLadder = true;
 	$scope.version = {orig: true, ot: true, oe: true};
@@ -82,7 +83,9 @@ angular.module("mainApp", [])
 			types = types.concat(item.itemType.replace(/\([A-Za-z0-9\s]+\)/g, "").split("/"));
 			$scope.items[i].itemType = item.itemType.replace(/\//g, "\n");
 		}
-		$scope.itemTypes = types.filter($scope.onlyUnique)
+		$scope.itemTypes = types.filter($scope.onlyUnique).sort(function(a, b) {
+			return a.localeCompare(b);
+		});
 
 		$("[placeholder='Runes']:not('.bound')").change(function(){
 			$scope.$apply();
@@ -93,10 +96,10 @@ angular.module("mainApp", [])
 		}).addClass("bound");
 
 		$.each($scope.itemTypes, function(key, value) {
-		$("#itemSelect")
-			.append($("<option></option>")
-				.attr("value", value)
-				.text(value));
+			$("#itemSelect")
+				.append($("<option></option>")
+					.attr("value", value)
+					.text(value));
 		});
 
 		$("#runes").tagsinput({
@@ -110,6 +113,34 @@ angular.module("mainApp", [])
 
 		$("#versionHolder").text("Version " + $("#version").text());
 
+		try {
+			$.material.init();
+			$("#itemSelect").selectpicker();
+		}
+		catch {
+			//For unit testing
+		}
+	}
+
+	$scope.updateItemType = function(e) {
+		let newTypes = $scope.itemType.filter(x => !$scope.oldItemTypes.includes(x));
+		$scope.oldItemTypes = $scope.itemType.slice(0);
+
+		for(let i = 0; i < newTypes.length; ++i) {
+			let types = itemTypeParents.filter(x => x.name === newTypes[i]);
+			if (types.length > 0) {
+				let type = types[0];
+				$("#itemSelect option").each(function() {
+					let val = $(this).val();
+					let index = type.parents.indexOf(val);
+					if(index > -1) {
+						let vals = $scope.itemType;
+						vals.push(val);
+						$("#itemSelect").selectpicker('val', vals);
+					}
+				});
+			}
+		}
 	}
 
 	$scope.outputRune = function(runes){
@@ -187,8 +218,10 @@ angular.module("mainApp", [])
 		for(var i = 0; i < testType.length; ++i){
 			let itemType = testType[i];
 			if(type.includes(itemType)){
-				typeFound = true;
-				break;
+			    if(itemType != "weapons" || (itemType == "weapons" && type == itemType)) {
+					typeFound = true;
+					break;
+				}
 			}
 		}
 		if(!typeFound && testType.length != 0) return false;

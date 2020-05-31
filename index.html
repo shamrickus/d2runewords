@@ -15,33 +15,33 @@
   </script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/material.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/ripples.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/bootstrap-material-design.css"></link>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/ripples.css"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/bootstrap-material-design.min.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/ripples.min.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"></link>
   
   <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"></link>
-
-  <script src="script/bootstrap-tagsinput-angular.js"></script>
-  <script src="script/bootstrap-tagsinput.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/js/bootstrap-select.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/css/bootstrap-select.min.css"></link>
 
   <link rel="stylesheet" href="style/bootstrap-tagsinput.css"></link>
 
-	<script src="script/data.js?version=10043"></script>
-	<script src="script/app.js?version=10043"></script>
-	<link rel="stylesheet" href="style/app.css?version=10043"></link>
+  <script src="script/data.js?version=1050"></script>
+  <script src="script/app.js?version=1050"></script>
+  <link rel="stylesheet" href="style/app.css?version=1050"></link>
 
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
+<script src="script/bootstrap-tagsinput-angular.js"></script>
+<script src="script/bootstrap-tagsinput.js"></script>
+
 <body ng-app="mainApp" ng-controller="sortController">
 <div class="container">
   <div class="well">
@@ -50,52 +50,66 @@
     <p id="versionHolder"></p>
   </div>
   <form action="">
-    <div class="form-group well searchWell">
-      <p>To see specific field options, hover over icon next to the field</p>
-      <div class="input-group">
-        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Not case sensitive" class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="name" placeholder="Name"/>
+    <div class="inputs well searchWell">
+      <div class="form-group label-floating">
+        <label for="name" class="control-label">Name</label>
+        <input id="name" type="text" class="form-control" ng-model="name"/>
+        <p class="help-block">Not case sensitive</p>
       </div>
-      <div class="input-group">
-        <div class="input-group-addon"><span data-toggle="tooltip" title="" data-placement="bottom" data-original-title="You can either input a number for equality or you can type (<|<=|>|>=) XX" class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="sockets" placeholder="Sockets"/>
+      <div class="form-group label-floating">
+        <label for="sockets" class="control-label">Sockets</label>
+        <input id="sockets" type="text" class="form-control" ng-model="sockets"/>
+        <p class="help-block">You can either input a number for equality or you can type (<|<=|>|>=) XX</p>
       </div>
-      <div class="input-group">
-        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Not case sensitive" class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="properties" placeholder="Properties"/>
+      <div class="form-group label-floating">
+        <label for="properties" class="control-label">Properties</label>
+        <input id="properties" type="text" class="form-control" ng-model="properties"/>
+        <p class="help-block">Not case sensitive</p>
       </div>
-      <div class="input-group">
-        <div class="input-group-addon"><span data-toggle="tooltip" title="" data-placement="bottom" data-original-title="You can either input a number for equality or you can type (<|<=|>|>=) XX" class="fa fa-search"></span></div>
-        <input type="text" class="form-control" ng-model="lvlReq" placeholder="Level Requirement"/>
+      <div class="form-group label-floating">
+        <label for="levelReq" class="control-label">Level Requirement</label>
+        <input id="levelReq" type="text" class="form-control" ng-model="lvlReq"/>
+        <p class="help-block">You can either input a number for equality or you can type (<|<=|>|>=) XX</p>
       </div>
-      <div class="input-group">
-        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Multiselect with searching (not case sensitive)" class="fa fa-search"></span></div>
-        <select id="itemSelect" data-actions-box="true" class="selectpicker" multiple data-live-search="true" ng-model="itemType" title="Item Type">
+      <div class="form-group input-group">
+        <select id="itemSelect" data-actions-box="true" multiple data-live-search="true" ng-change="updateItemType($event)" ng-model="itemType" title="Item Type">
         </select>
       </div>
-      <div class="input-group">
-        <div class="input-group-addon"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Tagged input with suggested runes" class="fa fa-search"></span></div>
-        <input type="text" data-role="tagsinput" class="form-control" id="runes" placeholder="Runes"/>
-        <label class="label-cont checkbox-inline" data-toggle="tooltip" data-placement="bottom" data-original-title="If enabled, only show runewords that contain all of the selected runes">
-           <input type="checkbox" ng-model="runesStrict" />Strict
-        </label>
-      </div>
-      <div class="input-group cb">
-          <label class="label-cont checkbox-inline">
-            <input type="checkbox" ng-model="includeLadder" />Include Ladder Runewords
-          </label>
-          <div>
-            <span>Versions:</span>
-            <label class="checkbox-inline">
-              <input type="checkbox" ng-model="version.orig" />1.09
-            </label>
-            <label class="checkbox-inline">
-              <input type="checkbox" ng-model="version.ot" />1.10
-            </label>
-            <label class="checkbox-inline">
-              <input type="checkbox" ng-model="version.oe" />1.11
+      <div class="form-group">
+        <div class="runeFormGroup">
+          <input type="text" data-role="tagsinput" class="form-control" id="runes" placeholder="Runes"/>
+          <div class="checkbox strictLabel">
+            <label data-toggle="tooltip" data-placement="bottom" data-original-title="If enabled, only show runewords that contain all of the selected runes">
+              <input type="checkbox" ng-model="runesStrict" />Strict
             </label>
           </div>
+          </label>
+        </div>
+      </div>
+      <div class="form-group half">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="includeLadder" />Include Ladder Runewords
+            </label>
+          </div>
+      </div>
+      <div class="form-group half mult">
+            <span class="twitter-typeahead">Versions:</span>
+            <div class="checkbox">
+              <label class="checkbox-inline">
+                <input type="checkbox" ng-model="version.orig" />1.09
+              </label>
+            </div>
+            <div class="checkbox">
+              <label class="checkbox-inline">
+                <input type="checkbox" ng-model="version.ot" />1.10
+              </label>
+            </div>
+            <div class="checkbox">
+              <label class="checkbox-inline">
+                <input type="checkbox" ng-model="version.oe" />1.11
+              </label>
+            </div>
         </div>
       </div>
   </form>
@@ -157,54 +171,63 @@
     <div class="modal-content">
       <div class="modal-body">
         <ul>
-          <b id="version">1.0.4.4</b>
+          <b id="version">1.5.0</b>
+          <li>Update version numbering</li>
+          <li>Item types will now also select children types when filtering <a href="https://github.com/shamrickus/d2runewords/issues/3">#3</a></li>
+          <li>Update dependencies</li>
+          <li>Fix issue with item types not always loading</li>
+          <li>Fix styling issues with third party library</li>
+          <li>Fix an issue with Weapons selecting both Missle and Melee</li>
+        </ul>
+        <ul>
+          <b>1.4.4</b>
           <li>Update dependencies</li>
         </ul>
         <ul>
-          <b>1.0.4.3</b>
+          <b>1.4.3</b>
           <li>Fixed styling on smaller screens</li>
         </ul>
         <ul>
-          <b>1.0.4.2</b>
+          <b>1.4.2</b>
           <li>Fixed styling on large screens</li>
           <li>Fix weapon type for Spirit</li>
         </ul>
         <ul>
-          <b>1.0.4.1</b>
+          <b>1.4.1</b>
           <li>Fixed styling on certain screen resolutions</li>
         </ul> 
         <ul>
-          <b>1.0.4.0</b>
+          <b>1.4.0</b>
           <li>Added strict options to runes</li>
           <li>Fixed sorting to restart when changing column</li>
           <li>Refactor filter code in anticipation of change to item type</li>
           <li>Added level requirement math to sockets</li>
         </ul>
         <ul>
-          <b>1.0.3.3</b>
+          <b>1.3.3</b>
           <li>Fixed confusing styling on table headers (non-sortable columns look like sortable columns)</li>
           <li>Added a favicon</li>
         </ul>
         <ul>
-          <b>1.0.3.2</b>
+          <b>1.3.2</b>
           <li>Fixed varius styling issues</li>
         </ul>
         <ul>
-          <b>1.0.3.1</b>
+          <b>1.3.1</b>
           <li>Fixed styling issue on runeword table</li>
         </ul>
         <ul>
-          <b>1.0.3.0</b>
+          <b>1.3.0</b>
           <li>Added field for ladder only rune words</li>
           <li>Added field for rune word version</li>
           <li>Fixed sort arrows such that they show the correct value</li>
         </ul>
         <ul> 
-          <b>1.0.2.1</b>
+          <b>1.2.1</b>
           <li>Added jasmine tests (no front end changes)</li>
         </ul>
         <ul>
-          <b>1.0.2.0</b>
+          <b>1.2.0</b>
           <li>Item Type is now split on "/" to provide more space for other columns</li>
           <li>Item Type is now a select field</li>
           <li>Many tags added for select field</li>
@@ -212,12 +235,12 @@
           <li>Added versioning to js files so no caching occurs</li>
         </ul>
         <ul>
-          <b>1.0.1.1</b>
+          <b>1.1.1</b>
           <li>Links no longer bring you to the top of the page</li>
           <li>Links now have the cursor set to pointer</li>
         </ul>
         <ul>
-          <b>1.0.1.0</b>
+          <b>1.1.0</b>
           <li>Now doing custom filtering</li>
           <li>Runes are now tags</li>
           <li>Level Requirement support rudimentary math (<, >, <=, >=)</li>
@@ -225,7 +248,7 @@
           <li>Added tooltip on icons for each form input</li>
         </ul>
         <ul>
-          <b>1.0.0.0</b>
+          <b>1.0.0</b>
           <li>Added Changelog</li>
           <li>Runewords with multiple items now work properply</li>
           <li>Screens below 1200 width now display better</li>
