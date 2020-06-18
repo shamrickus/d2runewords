@@ -21,7 +21,7 @@
   "homepage": "https://github.com/shamrickus/d2runewords#readme",
   "dependencies": {},
   "devDependencies": {
-    "angular": "^1.7.9",
+    "angular": "^1.8.0",
     "angular-mocks": "^1.7.8",
     "bootstrap": "^3.3.5",
     "jasmine": "^2.5.2",
