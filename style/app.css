@@ -119,6 +119,10 @@ a {
     max-width: 635px !important;
 }
 
+.bootstrap-select .dropdown-menu li:nth-of-type(even) {
+	background-color: #e3f4f1;
+}
+
 @media (min-width: 992px) {
 	.form-group, .bootstrap-select {
 		width: 100%;

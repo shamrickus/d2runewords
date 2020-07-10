@@ -14,17 +14,17 @@
 
   </script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/bootstrap-material-design.min.css"></link>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/ripples.min.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.min.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.min.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"></link>
-  
+
   <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/js/bootstrap-select.min.js"></script>
@@ -32,9 +32,9 @@
 
   <link rel="stylesheet" href="style/bootstrap-tagsinput.css"></link>
 
-  <script src="script/data.js?version=1050"></script>
-  <script src="script/app.js?version=1050"></script>
-  <link rel="stylesheet" href="style/app.css?version=1050"></link>
+  <script src="script/data.js?version=1051"></script>
+  <script src="script/app.js?version=1051"></script>
+  <link rel="stylesheet" href="style/app.css?version=1051"></link>
 
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -93,7 +93,7 @@
             </label>
           </div>
       </div>
-      <div class="form-group half mult">
+      <div class="half mult form-group">
             <span class="twitter-typeahead">Versions:</span>
             <div class="checkbox">
               <label class="checkbox-inline">
@@ -118,7 +118,7 @@
 	<thead>
       <tr>
         <th>
-          <a ng-click="sort('name')">Name 
+          <a ng-click="sort('name')">Name
              <span class="fa fa-caret-down" ng-show="!sortReverse && sortName=='name'"></span>
              <span class="fa fa-caret-up" ng-show="sortReverse && sortName=='name'"></span>
           </a>
@@ -171,7 +171,12 @@
     <div class="modal-content">
       <div class="modal-body">
         <ul>
-          <b id="version">1.5.0</b>
+          <b id="version">1.5.1</b>
+          <li>Add styling to item types to help determine what is checked.</li>
+          <li>Update css library</li>
+        </ul>
+        <ul>
+          <b>1.5.0</b>
           <li>Update version numbering</li>
           <li>Item types will now also select children types when filtering <a href="https://github.com/shamrickus/d2runewords/issues/3">#3</a></li>
           <li>Update dependencies</li>
@@ -195,7 +200,7 @@
         <ul>
           <b>1.4.1</b>
           <li>Fixed styling on certain screen resolutions</li>
-        </ul> 
+        </ul>
         <ul>
           <b>1.4.0</b>
           <li>Added strict options to runes</li>
@@ -222,7 +227,7 @@
           <li>Added field for rune word version</li>
           <li>Fixed sort arrows such that they show the correct value</li>
         </ul>
-        <ul> 
+        <ul>
           <b>1.2.1</b>
           <li>Added jasmine tests (no front end changes)</li>
         </ul>
